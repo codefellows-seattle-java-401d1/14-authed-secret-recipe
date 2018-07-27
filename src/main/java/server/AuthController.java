@@ -1,10 +1,10 @@
 package server;
 
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import server.db.UserDB;
 import server.models.User;
@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/auth")
 @SessionAttributes("username")
 public class AuthController {
+
+    //Register a first-time user
     @PostMapping("/register")
     public ModelAndView register(@RequestParam String username, @RequestParam String password, @RequestParam String bio) {
         ModelAndView mv = new ModelAndView();
@@ -31,6 +33,7 @@ public class AuthController {
         return mv;
     }
 
+    //Logs in a returning user
     @PostMapping("/login")
     public ModelAndView login(
             HttpServletRequest request,
