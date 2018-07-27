@@ -40,10 +40,10 @@ public class UserDB {
         "CREATE DATABASE javaauth; " +
         "DROP TABLE IF EXISTS users; " +
         "CREATE TABLE users ( " +
-        "        id serial, " +
-        "        username text, " +
-        "        passhash text, " +
-        "        bio text " +
+        "id serial, " +
+        "username text, " +
+        "passhash text, " +
+        "bio text " +
         "); " +
         "INSERT INTO users(username, passhash, bio) " +
         "VALUES('moonmayor', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Been running this moon a long time now.'), " +
@@ -123,9 +123,9 @@ public class UserDB {
             }
 
             int id = results.getInt("id");
-            String username = results.getString("username");
-            String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
+            String username = results.getString("username").trim();
+            String passhash = results.getString("passhash").trim();
+            String bio = results.getString("bio").trim();
 
             User user = new User(id, username, passhash, bio);
             return user;
@@ -166,6 +166,5 @@ public class UserDB {
             e.printStackTrace();
             return false;
         }
-
     }
 }
