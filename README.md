@@ -18,7 +18,7 @@ passwords, or their hashes if you return User information over any request.
 
 ## Feature Tasks
 * Create a database
-* Create a table that models users with a username, id, and hashed password.
+* Create a table that com.example.AuthDemo.models users with a username, id, and hashed password.
 * Authenticate the site so only logged-in users can see the secret recipe.
 * Use Bcrypt to hash all passwords stored on the site.
 
