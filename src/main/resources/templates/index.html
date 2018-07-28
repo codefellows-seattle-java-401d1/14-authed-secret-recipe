@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
     <head>
         <meta charset="UTF-8" />
@@ -8,11 +8,22 @@
 
     <body>
         <header>
-            <h1>Secret Recipe Vault</h1>
             <div>
-                Welcome to the secret recipe vault.
-                <a href="/private/secret.html">View the recipes,</a>
-                but make sure you log in!
+                <h1>The Vault</h1>
+            </div>
+
+            <div>
+
+                <p>
+                    <span th:if="${username != 'user'}">Welcome, <b th:text="${username}" />
+                    <p>You may access <a href="/private/secret.html">the vault</a></p></span>
+                </p>
+
+                <p>
+                    <span th:if="${username == 'user'}">Welcome to the vault, <b th:text="${username}" />
+                    <p>Please log in for site access.</p></span>
+                </p>
+
             </div>
         </header>
 

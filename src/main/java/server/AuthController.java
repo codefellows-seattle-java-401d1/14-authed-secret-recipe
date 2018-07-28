@@ -1,6 +1,7 @@
 package server;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,9 +65,32 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         session.setAttribute("loggedin", false);
+
+
+        //Once a user has been logged out(as opposed to never having visited), the user name will be set to
+        //"user" so it will work with the thymleaf template
+        String username = (String) session.getAttribute("username");
+        boolean isLoggedIn = (boolean) session.getAttribute("loggedin");
+        if (!isLoggedIn) {
+            username = "user";
+            model.addAttribute("username", "user");
+        }
+
+        //Once the username is not null (as it would be if the visitor has never visited before)
+        //the user name is set. Both the if statement above and this one are necessary for the thymleaf
+        //to get the information it needs for proper user info
+        if (username != null) {
+            model.addAttribute("username", username);
+        }
+
+        //I wanted a more meaningful and easily read console log to follow the program through
+        System.out.println("From Logout Page: \n"
+                + "Session ID: " + session.getId() + " for User " + "\"" + username + "\""
+                + "\n" + "Logged In = " + session.getAttribute("loggedin") + "\n");
+
         return new ModelAndView("loggedout");
     }
 }
