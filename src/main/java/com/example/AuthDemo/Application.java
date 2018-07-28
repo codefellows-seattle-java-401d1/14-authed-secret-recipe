@@ -15,7 +15,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @GetMapping
+    @GetMapping("/")
     public String homepage(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
