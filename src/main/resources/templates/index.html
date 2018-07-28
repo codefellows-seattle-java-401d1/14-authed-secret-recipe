@@ -8,23 +8,22 @@
 
     <body>
         <header>
-            <h1>Secret Recipe Vault</h1>
             <div>
-                Welcome to the secret recipe vault.
-                <a href="/private/secret.html">View the recipes,</a>
-                but make sure you log in!
-                <!--if username != null, Welcome, you are logged in as XXXX else, Please log in to view recipes-->
+                <h1>The Vault</h1>
+            </div>
+
+            <div>
+
                 <p>
-                <!--Logged in as <i th:text="${username}" />-->
+                    <span th:if="${username != 'user'}">Welcome, <b th:text="${username}" />
+                    <p>You may access your <a href="/private/secret.html">secrets</a></p></span>
                 </p>
 
                 <p>
-                    <span th:if="${username != 'user'}">Welcome, <i th:text="${username}" /></span>
-                    <span th:if="${username == 'user'}">Welcome, <i th:text="${username}" />, to the vault. Please log in for site access.</span>
-                    <!--<span th:unless="${username == null}"></span>-->
+                    <span th:if="${username == 'user'}">Welcome to the vault, <b th:text="${username}" />
+                    <p>Please log in for site access.</p></span>
                 </p>
-
-
+                
             </div>
         </header>
 
