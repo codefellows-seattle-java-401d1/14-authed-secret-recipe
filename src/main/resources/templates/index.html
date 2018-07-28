@@ -16,14 +16,14 @@
 
                 <p>
                     <span th:if="${username != 'user'}">Welcome, <b th:text="${username}" />
-                    <p>You may access your <a href="/private/secret.html">secrets</a></p></span>
+                    <p>You may access <a href="/private/secret.html">the vault</a></p></span>
                 </p>
 
                 <p>
                     <span th:if="${username == 'user'}">Welcome to the vault, <b th:text="${username}" />
                     <p>Please log in for site access.</p></span>
                 </p>
-                
+
             </div>
         </header>
 
