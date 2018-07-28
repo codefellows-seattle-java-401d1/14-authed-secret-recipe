@@ -1,6 +1,7 @@
 package server;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,9 +65,33 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ModelAndView logout(HttpServletRequest request) {
+    public ModelAndView logout(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         session.setAttribute("loggedin", false);
+
+
+        ////////////////////////
+        String username = (String) session.getAttribute("username");
+
+        System.out.println("From Logout" + session.getId() + " " + username);
+//        ModelAndView mv = new ModelAndView();
+        System.out.println("From Logout Page, /private " + session.getAttribute("loggedin"));
+
+        boolean isLoggedIn = (boolean) session.getAttribute("loggedin");
+
+        if (!isLoggedIn) {
+            username = "user";
+            model.addAttribute("username", "user");
+        }
+
+        if (username != null) {
+            model.addAttribute("username", username);
+        }
+        System.out.println("From Logout, after setter usernam to null" + session.getId() + " " + username);
+
+        //////////////////////////
+
+
         return new ModelAndView("loggedout");
     }
 }
