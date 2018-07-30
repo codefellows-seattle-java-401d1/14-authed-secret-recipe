@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/14-authed-secret-recipe.iml" filepath="$PROJECT_DIR$/.idea/14-authed-secret-recipe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-authed-secret-recipe_main.iml" filepath="$PROJECT_DIR$/.idea/modules/14-authed-secret-recipe_main.iml" group="14-authed-secret-recipe" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/14-authed-secret-recipe_test.iml" filepath="$PROJECT_DIR$/.idea/modules/14-authed-secret-recipe_test.iml" group="14-authed-secret-recipe" />
+    </modules>
+  </component>
+</project>
