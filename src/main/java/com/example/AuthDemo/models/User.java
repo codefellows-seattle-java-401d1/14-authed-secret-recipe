@@ -3,6 +3,7 @@ package com.example.AuthDemo.models;
 import com.example.AuthDemo.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
+
 public class User {
     private static final String DEFAULT_NAME = "No Name";
     private static final String DEFAULT_PASS = "password";
