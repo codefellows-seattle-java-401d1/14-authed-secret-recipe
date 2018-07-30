@@ -8,7 +8,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,9 +18,13 @@ public class UserDB {
         try {
             Class.forName("org.postgresql.Driver");
             String url = "jdbc:postgresql://localhost:5432/javaauth";
+            Properties props = new Properties();
+            // use these properties if you need to provide a username or password.
+            props.setProperty("user","tara");
+            props.setProperty("password","password");
 
             try {
-                mConn = DriverManager.getConnection(url);
+                mConn = DriverManager.getConnection(url, props);
                 ResultSet results = mConn.createStatement().executeQuery("SELECT * FROM users");
                 while (results.next()) {
                     int id = results.getInt("id");
@@ -125,9 +128,9 @@ public class UserDB {
             }
 
             int id = results.getInt("id");
-            String username = results.getString("username");
-            String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
+            String username = results.getString("username").trim();
+            String passhash = results.getString("passhash").trim();
+            String bio = results.getString("bio").trim();
 
             User user = new User(id, username, passhash, bio);
             return user;
