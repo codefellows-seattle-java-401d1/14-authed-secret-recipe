@@ -1,6 +1,6 @@
 package com.example.AuthDemo.models;
 
-import com.example.AuthDemo.mock.MockUserDB;
+import com.example.AuthDemo.db.UserDB;
 import com.example.AuthDemo.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
