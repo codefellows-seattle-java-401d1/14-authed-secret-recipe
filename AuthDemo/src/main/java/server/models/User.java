@@ -1,17 +1,19 @@
-package com.example.AuthorizationDemo.models;
+package server.models;
 
-import server.pojo.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
+import server.pojo.UserPojo;
+
 
 public class User {
     private static final String DEFAULT_NAME = "Unknown name";
-    private static final String DEFAULT_PASS = "Unknown password";
+    private static final String DEFAULT_PASS = "password";
 
-    public int id;
     public String username;
     private String passhash;
+    public int id;
 
-    public User(){
+    public User() {
+
         this(DEFAULT_NAME, DEFAULT_PASS);
     }
 
@@ -24,7 +26,6 @@ public class User {
         this(user.username, user.password, user.bio);
     }
     public User(String username, String password) {
-
         this(-1, username, password);
     }
 

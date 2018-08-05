@@ -1,7 +1,7 @@
 //package com.example.AuthorizationDemo.db;
 //
 //import com.example.AuthorizationDemo.mock.MockUserDB;
-//import com.example.AuthorizationDemo.models.User;
+//import server.models.User;
 //import org.junit.BeforeClass;
 //import org.junit.Test;
 //

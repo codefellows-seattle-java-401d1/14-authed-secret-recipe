@@ -2,7 +2,7 @@ package server;
 
 //imports from class demo
 import com.example.AuthorizationDemo.db.UserDB;
-import com.example.AuthorizationDemo.models.User;
+import server.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +25,7 @@ public class AuthController {
         if (UserDB.getUserByName(username) != null) {
             newModelView.setViewName("loginerror");
             newModelView.addObject("error", "Sorry, that user name has already been chosen by someone else. Try a " +
-                    "different username.")
+                    "different username.");
         } else {
             //if the username doesn't already exist, create it
             UserDB.createUser(username, password);
@@ -47,7 +47,7 @@ public class AuthController {
         User user = UserDB.getUserByName(username);
         if (user == null) {
             newModelView.setViewName("loginerror");
-            newModelView.addObject("error", "Sorry that user doesn't exist. Try another username")
+            newModelView.addObject("error", "Sorry that user doesn't exist. Try another username");
         } else {
             boolean isCorrectPassword = user.checkPassword(password);
             if (isCorrectPassword) {

@@ -1,3 +1,5 @@
+package server;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 public class Main {
