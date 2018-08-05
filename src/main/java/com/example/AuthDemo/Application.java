@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +13,9 @@ import javax.servlet.http.HttpSession;
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(com.example.AuthDemo.Application.class, args);
+        System.out.println("http://localhost:8080/");
 	}
+
 
 	@GetMapping("/")
 	public String homepage(HttpServletRequest request) {
@@ -23,4 +24,6 @@ public class Application {
 		System.out.println(session.getId() + " " + username);
 	    return "index";
 	}
+
+
 }

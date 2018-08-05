@@ -1,6 +1,6 @@
-package main.java.com.example.AuthDemo.models;
+package com.example.AuthDemo.models;
 
-import main.java.com.example.AuthDemo.pojos.UserPojo;
+import com.example.AuthDemo.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class User {

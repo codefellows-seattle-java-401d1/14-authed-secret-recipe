@@ -1,6 +1,6 @@
-package main.java.com.example.AuthDemo.db;
+package com.example.AuthDemo.db;
 
-import main.java.com.example.AuthDemo.models.User;
+import com.example.AuthDemo.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package main.java.com.example.AuthDemo.pojos;
+package com.example.AuthDemo.pojos;
 
 public class UserPojo {
     public String username;
