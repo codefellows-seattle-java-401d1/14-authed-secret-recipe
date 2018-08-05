@@ -14,7 +14,8 @@ public class User {
 
     public User() {
 
-        this(DEFAULT_NAME, DEFAULT_PASS);
+        this.username = DEFAULT_NAME;
+        this.passhash = DEFAULT_PASS;
     }
 
     public User(String username, String password) {
@@ -22,9 +23,15 @@ public class User {
         this(username, password, "");
     }
 
+//    public User(String username, String password){
+//        this.username = username;
+//        this.passhash = password;
+//    }
+
     public User(UserPojo user) {
-        this(user.username, user.password, user.bio);
+        this(user.username, user.password);
     }
+
     public User(String username, String password) {
         this(-1, username, password);
     }
