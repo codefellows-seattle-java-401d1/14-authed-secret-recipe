@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!--researched a couple different methods to get my css to show up. Will return to this later.-->
+        <!--https://stackoverflow.com/questions/27170772/where-place-static-css-file-in-a-spring-boot-project-->
+        <!--https://stackoverflow.com/questions/43266928/springboot-resource-interpreted-as-stylesheet-but-transferred-with-mime-type-t-->
+        <link rel="stylesheet" th:href="@{/css/main.css}" href ="/css/main.css"/>
+        <!--<link rel="stylesheet" href="/public/css/main.css"/>-->
+        <!--<link rel="stylesheet" href="public/css/main.css">-->
+        <title>Login</title>
+    </head>
+    <body>
+        <h1> Sooz's Secret Recipes</h1>
+        <main>
+            Welcome to Sooz's Secret Recipe book
+            <a href="/private/secret.html">View the recipes,</a>
+            but make sure you log in!
+        </main>
+
+        <section class="form-section">
+            <h1>Register if you haven't been here before</h1>
+            <form action="/auth/register" method="POST">
+                <label>Username: <input name="username" /></label>
+                <label>Password: <input name="password" type="password" /></label>
+                <label>Say Hello: <textarea name="bio" rows="2" cols="20"></textarea></label>
+                <input class="button" type="submit" />
+            </form>
+        </section>
+
+        <section class="form-section">
+            <h1>Login if you've already registerd</h1>
+            <form action="/auth/login" method="POST">
+                <div>Username: <input name="username" /></div>
+                <div>Password: <input name="password" type="password" /></div>
+                <input class="button" type="submit" />
+            </form>
+        </section>
+
+        <section class="form-section">
+            <h1>Logout</h1>
+            <form action="/auth/logout" method="POST">
+                <input class="button" type="submit" />
+            </form>
+            <p>Thanks for visiting!</p>
+        </section>
+
+    </body>
+</html>

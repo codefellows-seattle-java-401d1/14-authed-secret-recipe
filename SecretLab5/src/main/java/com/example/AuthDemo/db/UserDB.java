@@ -1,7 +1,6 @@
 package com.example.AuthDemo.db;
 
 import com.example.AuthDemo.models.User;
-import com.example.AuthDemo.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
@@ -9,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,7 +18,7 @@ public class UserDB {
     static {
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/userauth";
+            String url = "jdbc:postgresql://localhost:5432/javaauth";
 
             try {
                 mConn = DriverManager.getConnection(url);
@@ -38,8 +38,8 @@ public class UserDB {
     }
 
     public static void reset() {
-        String sql = "DROP DATABASE IF EXISTS userauth; " +
-        "CREATE DATABASE userauth; " +
+        String sql = "DROP DATABASE IF EXISTS  javaauth; " +
+        "CREATE DATABASE javaauth; " +
         "DROP TABLE IF EXISTS users; " +
         "CREATE TABLE users ( " +
         "        id serial, " +
@@ -86,8 +86,8 @@ public class UserDB {
                 String passhash = results.getString("passhash");
                 String bio = results.getString("bio");
 
-                User newUser = new User(id, username, passhash, bio);
-
+                User user = new User(id, username, passhash, bio);
+                users.add(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -170,5 +170,4 @@ public class UserDB {
         }
 
     }
-
 }

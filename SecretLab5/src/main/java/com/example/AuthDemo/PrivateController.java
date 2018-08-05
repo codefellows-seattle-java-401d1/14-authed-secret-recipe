@@ -1,31 +1,30 @@
 package com.example.AuthDemo;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-//gives logged in users access to the private/secret data - in this case my honey mustard chicken recipe
 @Controller
 @RequestMapping("/private")
 public class PrivateController {
-
     @RequestMapping("/*")
-    public ModelAndView handlePrivateRequests(HttpServletRequest request){
+    public ModelAndView handlePrivateRequests(HttpServletRequest request, Model model) {
         String servlet = request.getServletPath();
-        ModelAndView newModelView = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
 
         HttpSession session = request.getSession();
         boolean isLoggedIn = (boolean) session.getAttribute("loggedin");
-        System.out.println("/private " + session.getAttribute("loggedin"));
-        if(isLoggedIn){
-            newModelView.setViewName("secret");
-        }else{
-            newModelView.setViewName("accessdenied");
+
+        if (isLoggedIn) {
+            mv.setViewName("secret");
+        } else {
+            model.addAttribute("username", null);
+            mv.setViewName("accessdenied");
         }
-        return newModelView;
+        return mv;
     }
 }

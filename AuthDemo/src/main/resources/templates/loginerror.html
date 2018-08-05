@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <h1>Error Logging in</h1>
-    <p th:text="${error}" />
-    <p>
-        <a href="/">home</a>
-    </p>
+        <p th:text="${error}" />
+        You tried to login as <a th:text="${username}" />
+        <a href="/">Please go home to register or retry logging in</a>
+        </p>
 </html>
