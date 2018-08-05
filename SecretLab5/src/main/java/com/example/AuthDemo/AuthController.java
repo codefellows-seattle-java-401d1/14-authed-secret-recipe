@@ -18,7 +18,11 @@ import javax.servlet.http.HttpSession;
 @SessionAttributes("username")
 public class AuthController {
     @PostMapping("/register")
-    public ModelAndView register(@RequestParam String username, @RequestParam String password, @RequestParam String bio) {
+    public ModelAndView register(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String bio)
+    {
         ModelAndView mv = new ModelAndView();
 
         if (UserDB.getUserByName(username) != null) {
