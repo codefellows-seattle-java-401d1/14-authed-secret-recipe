@@ -11,3 +11,5 @@ body {
 h1 {
     color: black;
 }
+
+/*I can't get this to be seen by the index.html which makes no sense so I styled in with a style tag in the css.*/
