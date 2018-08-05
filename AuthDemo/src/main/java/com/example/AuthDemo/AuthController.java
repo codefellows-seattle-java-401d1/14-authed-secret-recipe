@@ -1,14 +1,15 @@
-package server;
+package com.example.AuthDemo;
 
 //imports from class demo
-import com.example.AuthorizationDemo.db.UserDB;
-import server.models.User;
+import com.example.AuthDemo.db.*;
+import com.example.AuthDemo.models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 
 //allow users to login and check to see if they're authorized
 @Controller
@@ -17,8 +18,12 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
 
     //controller path for registering to create a new user
-    @PostMapping("/registration")
-    public ModelAndView registration(@RequestParam String username, @RequestParam String password) {
+    @PostMapping("/register")
+    public ModelAndView register(
+            @RequestParam String username,
+            @RequestParam String password,
+            @RequestParam String bio)
+        {
         ModelAndView newModelView = new ModelAndView();
 
         //check the database to make sure the username doesn't already exist
@@ -28,7 +33,7 @@ public class AuthController {
                     "different username.");
         } else {
             //if the username doesn't already exist, create it
-            UserDB.createUser(username, password);
+            UserDB.createUser(username, password, bio);
             newModelView.setViewName("loggedin");
             newModelView.addObject("username", username);
         }

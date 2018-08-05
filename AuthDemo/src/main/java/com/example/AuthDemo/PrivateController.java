@@ -1,4 +1,4 @@
-package server;
+package com.example.AuthDemo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/private")
 public class PrivateController {
+
     @RequestMapping("/*")
     public ModelAndView handlePrivateRequests(HttpServletRequest request){
         String servlet = request.getServletPath();

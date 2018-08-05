@@ -1,6 +1,7 @@
-package com.example.AuthorizationDemo.db;
+package com.example.AuthDemo.db;
 
-import server.models.User;
+import com.example.AuthDemo.models.User;
+import com.example.AuthDemo.pojos.UserPojo;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class UserDB {
     private static Connection mConn;
@@ -42,9 +44,12 @@ public class UserDB {
         "CREATE TABLE users ( " +
         "        id serial, " +
         "        username text, " +
-        "        passhash text, ); " +
-        "INSERT INTO users(username, passhash) " +
-        "VALUES ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se');";
+        "        passhash text, " +
+        "        bio text " +
+        "); " +
+        "INSERT INTO users(username, passhash, bio) " +
+        "VALUES('moonmayor', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Been running this moon a long time now.'), " +
+        "       ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Other person. Same password. OK!'); ";
 
         try {
             mConn.createStatement().execute(sql);
@@ -54,15 +59,15 @@ public class UserDB {
     }
 
 
-    public static User createUser(String username, String password) {
+    public static User createUser(String username, String password, String bio) {
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        String sql = "INSERT INTO users(username, passhash) VALUES('%s', '%s') RETURNING (id);";
-        sql = String.format(sql, username, hashed);
+        String sql = "INSERT INTO users(username, passhash, bio) VALUES('%s', '%s', '%s') RETURNING (id);";
+        sql = String.format(sql, username, hashed, bio);
 
         try (ResultSet results = mConn.createStatement().executeQuery(sql)) {
             results.next();
             int id = results.getInt("id");
-            User user = new User(id, username, hashed);
+            User user = new User(id, username, hashed, bio);
             return user;
         } catch (SQLException e) {
             return null;
@@ -79,9 +84,10 @@ public class UserDB {
                 int id = results.getInt("id");
                 String username = results.getString("username");
                 String passhash = results.getString("passhash");
+                String bio = results.getString("bio");
 
-                User user = new User(id, username, passhash);
-                users.add(user);
+                User newUser = new User(id, username, passhash, bio);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -98,8 +104,9 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
+            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash);
+            User user = new User(id, username, passhash, bio);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,8 +127,9 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
+            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash);
+            User user = new User(id, username, passhash, bio);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,9 +137,9 @@ public class UserDB {
         return null;
     }
 
-    public static User updateUsername (int searchId, String newUsername) {
-        String sql = "UPDATE users SET username='%s' WHERE id=%d RETURNING *;";
-        sql = String.format(sql, newUsername, searchId);
+    public static User updateUserBio (int searchId, String newBio) {
+        String sql = "UPDATE users SET bio='%s' WHERE id=%d RETURNING *;";
+        sql = String.format(sql, newBio, searchId);
 
         try (ResultSet results = mConn.createStatement().executeQuery(sql)) {
             results.next();
@@ -139,8 +147,9 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
+            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash);
+            User user = new User(id, username, passhash, bio);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,4 +170,5 @@ public class UserDB {
         }
 
     }
+
 }
