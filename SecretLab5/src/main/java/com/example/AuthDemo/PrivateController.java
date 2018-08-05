@@ -17,7 +17,7 @@ public class PrivateController {
 
         HttpSession session = request.getSession();
         boolean isLoggedIn = (boolean) session.getAttribute("loggedin");
-        System.out.println("/private " + session.getAttribute("loggedin"));
+
         if (isLoggedIn) {
             mv.setViewName("secret");
         } else {
