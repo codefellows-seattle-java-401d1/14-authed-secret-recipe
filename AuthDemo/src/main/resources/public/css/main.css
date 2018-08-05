@@ -1,0 +1,18 @@
+body{
+    background-color: #f7f388;
+    color: #44467b;
+    font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+}
+label{
+    color: #282a4a;
+}
+
+h1{
+    font-size: 2vh;
+}
+
+.form-section{
+    background-color: #f5f170;
+    border: dimgrey .5vw;
+    width: auto;
+}

@@ -1,6 +1,6 @@
-package com.example.AuthDemo.db;
+package com.example.AuthorizationDemo.db;
 
-import com.example.AuthDemo.models.User;
+import com.example.AuthorizationDemo.models.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.Connection;
@@ -8,9 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 
 public class UserDB {
     private static Connection mConn;
@@ -18,7 +16,7 @@ public class UserDB {
     static {
         try {
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/javaauth";
+            String url = "jdbc:postgresql://localhost:5432/userauth";
 
             try {
                 mConn = DriverManager.getConnection(url);
@@ -38,18 +36,15 @@ public class UserDB {
     }
 
     public static void reset() {
-        String sql = "DROP DATABASE IF EXISTS  javaauth; " +
-        "CREATE DATABASE javaauth; " +
+        String sql = "DROP DATABASE IF EXISTS userauth; " +
+        "CREATE DATABASE userauth; " +
         "DROP TABLE IF EXISTS users; " +
         "CREATE TABLE users ( " +
         "        id serial, " +
         "        username text, " +
-        "        passhash text, " +
-        "        bio text " +
-        "); " +
-        "INSERT INTO users(username, passhash, bio) " +
-        "VALUES('moonmayor', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Been running this moon a long time now.'), " +
-        "       ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se', 'Other person. Same password. OK!'); ";
+        "        passhash text, ); " +
+        "INSERT INTO users(username, passhash) " +
+        "VALUES ('otheruser', '$2a$12$u7s.Q60pWu01Yujt6KH4wuX8Dcf9Pm1PlwEoQcGXhHrpYzRH53.Se');";
 
         try {
             mConn.createStatement().execute(sql);
@@ -59,15 +54,15 @@ public class UserDB {
     }
 
 
-    public static User createUser(String username, String password, String bio) {
+    public static User createUser(String username, String password) {
         String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
-        String sql = "INSERT INTO users(username, passhash, bio) VALUES('%s', '%s', '%s') RETURNING (id);";
-        sql = String.format(sql, username, hashed, bio);
+        String sql = "INSERT INTO users(username, passhash) VALUES('%s', '%s') RETURNING (id);";
+        sql = String.format(sql, username, hashed);
 
         try (ResultSet results = mConn.createStatement().executeQuery(sql)) {
             results.next();
             int id = results.getInt("id");
-            User user = new User(id, username, hashed, bio);
+            User user = new User(id, username, hashed);
             return user;
         } catch (SQLException e) {
             return null;
@@ -84,9 +79,8 @@ public class UserDB {
                 int id = results.getInt("id");
                 String username = results.getString("username");
                 String passhash = results.getString("passhash");
-                String bio = results.getString("bio");
 
-                User user = new User(id, username, passhash, bio);
+                User user = new User(id, username, passhash);
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -104,9 +98,8 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash, bio);
+            User user = new User(id, username, passhash);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,9 +120,8 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash, bio);
+            User user = new User(id, username, passhash);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -137,9 +129,9 @@ public class UserDB {
         return null;
     }
 
-    public static User updateUserBio (int searchId, String newBio) {
-        String sql = "UPDATE users SET bio='%s' WHERE id=%d RETURNING *;";
-        sql = String.format(sql, newBio, searchId);
+    public static User updateUsername (int searchId, String newUsername) {
+        String sql = "UPDATE users SET username='%s' WHERE id=%d RETURNING *;";
+        sql = String.format(sql, newUsername, searchId);
 
         try (ResultSet results = mConn.createStatement().executeQuery(sql)) {
             results.next();
@@ -147,9 +139,8 @@ public class UserDB {
             int id = results.getInt("id");
             String username = results.getString("username");
             String passhash = results.getString("passhash");
-            String bio = results.getString("bio");
 
-            User user = new User(id, username, passhash, bio);
+            User user = new User(id, username, passhash);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();

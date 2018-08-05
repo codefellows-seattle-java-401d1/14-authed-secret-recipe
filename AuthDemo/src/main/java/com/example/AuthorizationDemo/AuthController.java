@@ -1,13 +1,9 @@
-package com.example.AuthDemo;
+package com.example.AuthorizationDemo;
 
-import com.example.AuthDemo.db.UserDB;
-import com.example.AuthDemo.models.User;
-import com.example.AuthDemo.pojos.UserPojo;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.http.MediaType;
+import com.example.AuthorizationDemo.db.UserDB;
+import com.example.AuthorizationDemo.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

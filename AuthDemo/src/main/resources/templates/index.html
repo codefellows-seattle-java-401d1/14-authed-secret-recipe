@@ -1,32 +1,45 @@
-<h1>Secret Recipe Vault</h1>
-<div>
-    Welcome to the secret recipe vault.
-    <a href="/private/secret.html">View the recipes,</a>
-    but make sure you log in!
-</div>
 
-<h1>Login</h1>
-<form action="/auth/login" method="POST">
-    <div>Username: <input name="username" /></div>
-    <div>Password: <input name="password" type="password" /></div>
-    <input type="submit" />
-</form>
+<html>
+    <!--<head>-->
+        <!--<meta charset="UTF-8">-->
+        <!--<title>Grandma Fannie's Secret Recipes</title>-->
+        <!--<link type="text/css" rel="stylesheet" href="public/css/main.css" >-->
+    <!--</head>-->
+    <body>
+        <h1> Sooz's Secret Recipes</h1>
+        <main>
+            Welcome to Sooz's Secret Recipe book
+            <a href="/private/secret.html">View the recipes,</a>
+            but make sure you log in!
+        </main>
 
-<h1>Register</h1>
-<form action="/auth/register" method="POST">
-    <div>Username: <input name="username" /></div>
-    <div>Password: <input name="password" type="password" /></div>
+        <section class="form-section">
+            <h1>Register if you haven't been here before</h1>
+                <form action="/auth/register" method="POST">
+                    <label>Username: <input name="username" /></label>
+                    <label>Password: <input name="password" type="password" /></label>
+                    <label>Relationship to Sooz: <input name="relationship" type="relationship" /></label>
+                    <input type="submit" />
+                </form>
+        </section>
 
-    <p>Bio</p>
-    <div>
-        <textarea name="bio" rows="4" cols="80"></textarea>
-    </div>
+        <section class="form-section">
+            <h1>Login if you've already registerd</h1>
+                <form action="/auth/login" method="POST">
+                    <div>Username: <input name="username" /></div>
+                    <div>Password: <input name="password" type="password" /></div>
+                    <input type="submit" />
+                </form>
+        </section>
 
-    <input type="submit" />
-</form>
+        <section class="form-section">
+            <h1>Logout</h1>
+                <form action="/auth/logout" method="POST">
+                    <input type="submit" />
+                </form>
+            <p>Thanks for visiting!</p>
+        </section>
 
-<h1>Logout</h1>
-<form action="/auth/logout" method="POST">
-    <input type="submit" />
-</form>
+    </body>
+</html>
 
