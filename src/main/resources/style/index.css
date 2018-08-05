@@ -1,0 +1,13 @@
+* {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body {
+    background-color: lightblue;
+    color: darkblue;
+}
+
+h1 {
+    color: black;
+}
